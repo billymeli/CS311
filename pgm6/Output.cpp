@@ -21,7 +21,7 @@ void Output::outputTickets(const Tickets& tickets)
   if (write_file.is_open()) {
     // write the header row to the file
     write_file << Ticket::getHeader() << endl;
-    
+
     for (int i = 0; i < tickets.size(); i++) {
       write_file << tickets[i].receipt() << endl;
     }
@@ -31,7 +31,7 @@ void Output::outputTickets(const Tickets& tickets)
 
 void Output::outputSummary(const Tickets& tickets)
 {
-  //Declaring variables to hold values for total gross bushels and net bushels
+  // Declaring variables to hold values for total gross bushels and net bushels
   double totalGrossBushels = 0;
   double totalNetBushels = 0;
 

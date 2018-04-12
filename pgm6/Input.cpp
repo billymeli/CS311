@@ -30,12 +30,16 @@ void Input::inputTickets(Tickets& tickets)
           try {
             int fieldNumber = 0;
             bool strLimitExceeded = false;
-            // variable that holds the grain type (char entered by the user)
             string type, date, time_string, ticketNumber, gross_weight, tare_weight, moisture_level, foreign_material;
+
             for(int i = 0; i < record.length(); i++) {
+              // get a new field when the delimiter '|' is encountered
               if (record[i] == '|') {
                 fieldNumber += 1;
               }
+
+              // append various portions of the record string to the appropriate variable
+              // excluding '|' and ' ' characters
               switch(fieldNumber) {
                 case 0: {
                   if (record[i] != '|' && record[i] != ' ') {
@@ -90,6 +94,7 @@ void Input::inputTickets(Tickets& tickets)
                 }
               }
             }
+            // Throwing an exception if a record doesn't have the appropriate number of fields
             if (fieldNumber != 7) {
               throw fieldNumber;
             }
@@ -98,16 +103,18 @@ void Input::inputTickets(Tickets& tickets)
               string time_stamp = date + " " + time_string;
               double grossWeight = 0, tareWeight = 0, moistureLevel = 0, foreignMaterial = 0;
 
+              // t is a variable of type time_t holding information about the date and time
               const char *timestamp = time_stamp.c_str();
               struct tm tm;
               strptime(timestamp, "%Y-%m-%d %H:%M:%S", &tm);
               t = mktime(&tm);
 
+              // converting each string to the appropriate type (interger, double)
               grossWeight = stoi(gross_weight);
               tareWeight = stoi(tare_weight);
               moistureLevel = stod(moisture_level);
               foreignMaterial = stod(foreign_material);
-              cout << "\n" << type << " " << date << " " << time_string<<" "<<ticketNumber<<" "<<grossWeight<<" "<<tareWeight<<" "<<moistureLevel<<" "<<foreignMaterial;
+
               // declaring an enum to hold the grain type
               Type grainType;
 
@@ -159,20 +166,22 @@ void Input::inputTickets(Tickets& tickets)
               if (NumOfDuplicates == 0) {
                 //Adding the ticket to the list of tickets
                 tickets.add(ticket);
-                cout << "\nTicket added " << ticket.getTicketNumber();
               } else {
                 cout << "\nError: Duplicate ticket encountered, ticket ignored!";
               }
             }
             catch(const exception& e) {
+              // handling exceptions for invalid type convertions
               cout << "\nInvalid input: " << e.what();
             }
           }
           catch(int e) {
+            // handling exception for insufficient number of fields in a record
             cout << "\nError! This record only has " << e << " number of fields";
           }
         }
       }
+    // closing file  
     read_file.close();
   }
 }
