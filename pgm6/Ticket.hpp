@@ -2,7 +2,7 @@
 // File Name: Ticket.hpp
 // Author: Billy Meli
 // Student ID: w882x457
-// Assignment Number: 4
+// Assignment Number: 6
 
 #include "Grain.hpp"
 #include <ctime>

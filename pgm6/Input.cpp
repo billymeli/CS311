@@ -1,7 +1,7 @@
 // File Name: Input.cpp
 // Author: Billy Meli
 // Student ID: w882x457
-// Assignment Number: 4
+// Assignment Number: 6
 
 #include <iostream>
 #include <fstream>
@@ -181,7 +181,7 @@ void Input::inputTickets(Tickets& tickets)
           }
         }
       }
-    // closing file  
+    // closing file
     read_file.close();
   }
 }

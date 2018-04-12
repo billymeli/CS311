@@ -1,7 +1,7 @@
 // File Name: Tickets.cpp
 // Author: Billy Meli
 // Student ID: w882x457
-// Assignment Number: 4
+// Assignment Number: 6
 
 #include "Tickets.hpp"
 #include <iostream>
@@ -43,7 +43,7 @@ void Tickets::add(const Ticket& ticket)
     }
 
     newArray[ticketArraySize - 1] = ticket;
-    
+
     delete[] ticketArray;
     ticketArray = newArray;
 

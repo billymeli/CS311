@@ -1,7 +1,7 @@
 // File Name: Ticket.cpp
 // Author: Billy Meli
 // Student ID: w882x457
-// Assignment Number: 4
+// Assignment Number: 6
 
 #include <iostream>
 #include <ctime>
