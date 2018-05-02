@@ -1,7 +1,7 @@
 // File Name: Ticket.cpp
 // Author: Billy Meli
 // Student ID: w882x457
-// Assignment Number: 6
+// Assignment Number: 7
 
 #include <iostream>
 #include <ctime>
@@ -74,10 +74,19 @@ bool Ticket::operator ==(const Ticket &T) const
   return (this->ticketNumber == T.getTicketNumber());
 }
 
-// Less than operator overloading function (returns true if ticket1 has a lower net bushels, otherwise returns false)
+// static member function to compare two tickets based on their netbushels and grain type
 bool Ticket::compareTickets(const Ticket &T1, const Ticket &T2)
 {
-  return (T1.calcNetBushels() < T2.calcNetBushels());
+  bool isgreaterThan = false;
+  int type1 = (T1.getSample()) ? T1.getSample()->getTypeVal() : 0;
+  int type2 = (T2.getSample()) ? T2.getSample()->getTypeVal() : 0;
+
+  if (type1 < type2) {
+    isgreaterThan = true;
+  } else if (type1 == type2 && T1.calcNetBushels() > T2.calcNetBushels()) {
+    isgreaterThan = true;
+  }
+  return isgreaterThan;
 }
 
 // Insertion operator overloading function (overloads the insertion operator to output a ticket receipt)

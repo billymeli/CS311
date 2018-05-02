@@ -1,7 +1,7 @@
 // File Name: Input.cpp
 // Author: Billy Meli
 // Student ID: w882x457
-// Assignment Number: 6
+// Assignment Number: 7
 
 #include <iostream>
 #include <fstream>
@@ -9,8 +9,6 @@
 #include <cstring>
 #include <string>
 #include "Input.hpp"
-#include "Ticket.hpp"
-#include "Array.h"
 
 using namespace std;
 using namespace ContainerTemplate;
@@ -23,12 +21,23 @@ void Input::inputTickets(Array<Ticket>& tickets)
 
   if (read_file.is_open()) {
       while(!read_file.eof()) {
-        // record is a string representing a ticket record imported from the file
-        string record;
-        getline(read_file, record);
+        // line is a string representing a line imported from the file
+        // record is a string representing a line after white space characters have been trimed
+        string line, record;
+        getline(read_file, line);
 
-        // exclude any line that begins with a pound or is a new line character
-        if (record[0] != '#' && record.length() > 1) {
+        // Triming leading/trailing white spaces from the line
+        const size_t strBegin = line.find_first_not_of(" ");
+        if (strBegin == string::npos) {
+          record = "";
+        } else {
+          const size_t strEnd = line.find_last_not_of(" ");
+          const size_t strRange = strEnd - strBegin + 1;
+          record = line.substr(strBegin, strRange);
+        }
+
+        // exclude any line that begins with a pound or is an
+        if (record[0] != '#' && record != "\t" && record != "\r" && record != "\n" ) {
           try {
             int fieldNumber = 0;
             bool strLimitExceeded = false;
@@ -185,5 +194,8 @@ void Input::inputTickets(Array<Ticket>& tickets)
       }
     // closing file
     read_file.close();
+  } else {
+    cout << "\n Error! Input file could not be opened" << endl;
+    exit(0);
   }
 }

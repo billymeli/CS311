@@ -2,7 +2,7 @@
 // File Name: Ticket.hpp
 // Author: Billy Meli
 // Student ID: w882x457
-// Assignment Number: 6
+// Assignment Number: 7
 
 #include "Grain.hpp"
 #include <ctime>
@@ -34,7 +34,7 @@ private:
   // Overloaded equality operator
   bool operator ==(const Ticket &T) const;
 
-  // Overloaded less than operator
+  // static member function to compare two tickets based on their netbushels and grain type
   static bool compareTickets(const Ticket &T1, const Ticket &T2);
 
   // Overloaded assignment operator = (copies the object argument into the calling object)

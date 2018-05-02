@@ -6,15 +6,110 @@
  */
 
 #include <stdexcept>
-#include <iostream>
 #include "Array.h"
 
-using namespace std;
 
 /**
  * Constants
  */
 static const int ARRAY_CAPACITY_BLOCK_SIZE = 10;
+
+// Default Constructor (initializes all numerical values to zero)
+template<class T>
+Array<T>::Array()
+  : arrayCapacity(0), arraySize(0)
+{
+  array = new T[arrayCapacity];
+}
+
+// Copy Constructor (copies a tickets object to another tickets object)
+template<class T>
+Array<T>::Array(const Array<T>& list)
+  : arrayCapacity(list.arrayCapacity), arraySize(list.arraySize)
+{
+  array = new T[arrayCapacity];
+}
+
+// Destructor
+template<class T>
+Array<T>::~Array() {
+  delete[] array;
+}
+
+// Adds a ticket to the array of Tickets
+template<class T>
+void Array<T>::add(const T& item)
+{
+  // increment the size of the ticket array
+  arraySize++;
+
+  if (arraySize > arrayCapacity) {
+    arrayCapacity = arraySize + 3;
+    T *newArray = new T[arrayCapacity];
+
+    for (unsigned int i = 0; i < arraySize - 1; i++){
+      newArray[i] = array[i];
+    }
+
+    newArray[arraySize - 1] = item;
+
+    delete[] array;
+    array = newArray;
+
+    return;
+  }
+  array[arraySize - 1] = item;
+}
+
+// Return size of array of tickets (number of tickets in array)
+template<class T>
+int Array<T>::size() const
+{
+  return arraySize;
+}
+
+// Overloaded assignment operator =
+template<class T>
+const Array<T>& Array<T>::operator =(const Array<T>& list)
+{
+  if (arrayCapacity != list.arrayCapacity) {
+    delete[] array;
+    array = new T[list.arrayCapacity];
+  }
+  arrayCapacity = list.arrayCapacity;
+  arraySize = list.arraySize;
+  for(int i = 0; i < arraySize; i++) {
+    array[i] = list.array[i];
+  }
+
+  return *this;
+}
+
+// Overloaded array operator [] (returns an anonymous ticket object if the index argument is greater the the ticket array size)
+template<class T>
+T Array<T>::operator [](int index) const
+{
+  if (index >= arraySize) {
+    return T();
+  }
+  return array[index];
+}
+
+// Return an iterator to the beginning of the array
+template<class T>
+ArrayIterator<T> Array<T>::begin()
+{
+	ArrayIterator<T> begin(this, 0);
+	return begin;
+}
+
+// Return an iterator to the end of the array (does not include last item)
+template<class T>
+ArrayIterator<T> Array<T>::end()
+{
+	ArrayIterator<T> end(this, this->arraySize);
+	return end;
+}
 
 /**
  * Iterator default constructor
@@ -392,100 +487,4 @@ ArrayIterator<T2> operator -(int index, const ArrayIterator<T2>& iterator)
 
 	// Return temporary iterator
 	return tempIterator;
-}
-
-// Default Constructor (initializes all numerical values to zero)
-template<class T>
-Array<T>::Array()
-  : arrayCapacity(0), arraySize(0)
-{
-  array = new T[arrayCapacity];
-}
-
-// Copy Constructor (copies a tickets object to another tickets object)
-template<class T>
-Array<T>::Array(const Array<T>& list)
-  : arrayCapacity(list.arrayCapacity), arraySize(list.arraySize)
-{
-  array = new T[arrayCapacity];
-}
-
-// Destructor
-template<class T>
-Array<T>::~Array() {
-  delete[] array;
-}
-
-// Adds a ticket to the array of Tickets
-template<class T>
-void Array<T>::add(const T& item)
-{
-  // increment the size of the ticket array
-  arraySize++;
-
-  if (arraySize > arrayCapacity) {
-    arrayCapacity = arraySize + 3;
-    T *newArray = new T[arrayCapacity];
-
-    for (unsigned int i = 0; i < arraySize - 1; i++){
-      newArray[i] = array[i];
-    }
-
-    newArray[arraySize - 1] = item;
-
-    delete[] array;
-    array = newArray;
-
-    return;
-  }
-  array[arraySize - 1] = item;
-}
-
-// Return size of array of tickets (number of tickets in array)
-template<class T>
-int Array<T>::size() const
-{
-  return arraySize;
-}
-
-// Overloaded assignment operator =
-template<class T>
-const Array<T>& Array<T>::operator =(const Array<T>& list)
-{
-  if (arrayCapacity != list.arrayCapacity) {
-    delete[] array;
-    array = new T[list.arrayCapacity];
-  }
-  arrayCapacity = list.arrayCapacity;
-  arraySize = list.arraySize;
-  for(int i = 0; i < arraySize; i++) {
-    array[i] = list.array[i];
-  }
-
-  return *this;
-}
-
-// Overloaded array operator [] (returns an anonymous ticket object if the index argument is greater the the ticket array size)
-template<class T>
-T Array<T>::operator [](unsigned int index) const
-{
-  if (index >= arraySize) {
-    cout << "This index doesn't exist in the tickets list \n";
-    return T();
-  }
-  return array[index];
-}
-
-template<class T>
-ArrayIterator<T> Array<T>::begin()
-{
-	ArrayIterator<T> begin(this, 0);
-	return begin;
-}
-
-template<class T>
-ArrayIterator<T> Array<T>::end()
-{
-	ArrayIterator<T> end(this, this->arraySize);
-	return end;
 }

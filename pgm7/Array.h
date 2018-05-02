@@ -143,7 +143,7 @@ public:
 	const Array<T>& operator =(const Array<T>& list);
 
 	// Overloaded array operator []
-	T operator [](unsigned int index) const;
+	T operator [](int index) const;
 
 	// Friend classes
 	friend class ArrayIterator<T>;

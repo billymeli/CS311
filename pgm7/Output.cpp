@@ -1,15 +1,13 @@
 // File Name: Output.cpp
 // Author: Billy Meli
 // Student ID: w882x457
-// Assignment Number: 6
+// Assignment Number: 7
 
 #include <iostream>
 #include <fstream>
 #include <ctime>
 #include <string>
-#include "Ticket.hpp"
 #include "Output.hpp"
-#include "Array.h"
 
 using namespace std;
 using namespace ContainerTemplate;
@@ -27,6 +25,9 @@ void Output::outputTickets(const Array<Ticket>& tickets)
     for (int i = 0; i < tickets.size(); i++) {
       write_file << tickets[i].receipt() << endl;
     }
+  } else {
+    cout << "\n Error! Output file could not be opened" << endl;
+    exit(0);
   }
   write_file.close();
 }

@@ -1,7 +1,7 @@
 // File Name: Milo.cpp
 // Author: Billy Meli
 // Student ID: w882x457
-// Assignment Number: 6
+// Assignment Number: 7
 
 #include <iostream>
 #include <string>
@@ -28,6 +28,13 @@ Milo* Milo::clone() const
 {
   Milo* clonePtr = new Milo(this->moistureLevel, this->foreignMaterial);
   return clonePtr;
+}
+
+// returns an integer representing the grain type
+int Milo::getTypeVal() const
+{
+  int grainTypeVal = 3;
+  return grainTypeVal;
 }
 
 // returns string representing the grain type

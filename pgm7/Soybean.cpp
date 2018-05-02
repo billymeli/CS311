@@ -1,7 +1,7 @@
 // File Name: Soybean.cpp
 // Author: Billy Meli
 // Student ID: w882x457
-// Assignment Number: 6
+// Assignment Number: 7
 
 #include <iostream>
 #include <string>
@@ -28,6 +28,13 @@ Soybean* Soybean::clone() const
 {
   Soybean* clonePtr = new Soybean(this->moistureLevel, this->foreignMaterial);
   return clonePtr;
+}
+
+// returns an integer representing the grain type
+int Soybean::getTypeVal() const
+{
+  int grainTypeVal = 2;
+  return grainTypeVal;
 }
 
 // returns string representing the grain type

@@ -2,7 +2,7 @@
 // File Name: Soybean.hpp
 // Author: Billy Meli
 // Student ID: w882x457
-// Assignment Number: 6
+// Assignment Number: 7
 
 #include "Grain.hpp"
 #include <string>
@@ -21,6 +21,9 @@ public:
 
   // returns a pointer pointing to a copy of the grain sample
   Soybean* clone() const;
+
+  // returns an integer representing the grain type
+  int getTypeVal() const;
 
   // returns string representing the grain type
   std::string getType() const;

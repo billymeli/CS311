@@ -28,6 +28,8 @@ public:
 
 	virtual std::string getType() const = 0;
 
+	virtual int getTypeVal() const = 0;
+
 	virtual const double getAverageTestWeight() const = 0;
 
 	virtual const double getIdealMoistureLevel() const = 0;

@@ -9,6 +9,7 @@
 #define OUTPUT_H_
 
 #include "Array.h"
+#include "Ticket.hpp"
 
 using namespace ContainerTemplate;
 

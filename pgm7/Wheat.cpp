@@ -1,7 +1,7 @@
 // File Name: Wheat.cpp
 // Author: Billy Meli
 // Student ID: w882x457
-// Assignment Number: 6
+// Assignment Number: 7
 #include <iostream>
 #include <string>
 #include "Wheat.hpp"
@@ -27,6 +27,13 @@ Wheat* Wheat::clone() const
 {
   Wheat* clonePtr = new Wheat(this->moistureLevel, this->foreignMaterial);
   return clonePtr;
+}
+
+// returns an integer representing the grain type
+int Wheat::getTypeVal() const
+{
+  int grainTypeVal = 1;
+  return grainTypeVal;
 }
 
 // returns string representing the grain type
