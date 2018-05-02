@@ -3,6 +3,7 @@
 // Student ID: w882x457
 // Assignment Number: 7
 
+#include <algorithm>
 #include "Array.h"
 #include "Output.hpp"
 #include "Input.hpp"
